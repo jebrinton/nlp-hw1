@@ -22,6 +22,9 @@ def dev_ngram(model):
     num_correct: int = 0
     total: int = 0
     for dev_line in dev_data:
+
+        # print(dev_line)
+
         q = model.start()
         for c_input, c_actual in zip([utils.START_TOKEN] + dev_line, dev_line + [utils.END_TOKEN]):
             q, p = model.step(q, c_input)
@@ -29,7 +32,7 @@ def dev_ngram(model):
             num_correct += int(c_predicted == c_actual)
             total += 1
 
-    print(num_correct / total)
+    return num_correct, total
 
 if __name__ == "__main__":
     my_model = train_ngram()

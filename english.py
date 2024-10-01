@@ -6,10 +6,11 @@ from ngram import Ngram
 from utils import Vocab
 import utils
 
-def train_ngram(n):
+def train_ngram():
+    N = 5
     path = "data/english/train"
     data = load_chars_from_file(path)
-    model = Ngram(n, data)
+    model = Ngram(N, data)
     return model
 
 def dev_ngram(model):
@@ -31,5 +32,5 @@ def dev_ngram(model):
     print(num_correct / total)
 
 if __name__ == "__main__":
-    my_model = train_ngram(5)
+    my_model = train_ngram()
     dev_ngram(my_model)

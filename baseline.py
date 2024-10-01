@@ -26,7 +26,7 @@ def dev_unigram(uni_model):
             num_correct += int(c_predicted == c_actual)
             total += 1
 
-    print(num_correct / total)
+    return num_correct, total
 
 if __name__ == "__main__":
     my_model = train_unigram()

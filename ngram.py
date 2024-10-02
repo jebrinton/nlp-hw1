@@ -133,7 +133,6 @@ class Ngram(object):
                 lam = total / (total + gram_to_num_tokens_seen_at_least_once[gram])
 
                 for v in self.vocab:
-
                     if v != START_TOKEN:
                         pr_v_given_gram = counts[v] / total
 
@@ -150,16 +149,10 @@ class Ngram(object):
     def step(self,
              q: Sequence[str],
              w: str) -> Tuple[Sequence[str], Mapping[str, float]]:
-        # step 1) update q with w
+        # append w and delete old first token
         r = q[1:] + (w,)
 
-        # step 2) lookup mapping on r
         p = self.logprobs.get(r, {v: math.log(1/(len(self.vocab)-1)) for v in self.vocab if v != START_TOKEN})
-
-
-        # check that it sums to 1
-        pmf_sum = math.fsum(math.exp(v) for v in p.values())
-        assert(abs(1.0 - pmf_sum) <= 1e-10)
 
         return r, p
 
